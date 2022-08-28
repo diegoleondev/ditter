@@ -1,0 +1,24 @@
+.submit {
+  border: none;
+  outline: none;
+  background-color: red;
+  user-select: none;
+  border-radius: 100px;
+
+  /* SIZE */
+  &--large {
+    font-size: 1.25rem;
+    padding: 12px 20px;
+  }
+
+  /* WRAPPER */
+  &--full {
+    width: 100%;
+  }
+
+  /* VARIANT */
+  &--black {
+    background-color: #000;
+    color: #fff;
+  }
+}

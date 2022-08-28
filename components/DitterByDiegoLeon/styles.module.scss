@@ -1,0 +1,18 @@
+.header {
+  width: 100%;
+  height: auto;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+
+  padding: 2rem 5%;
+  padding-bottom: 0;
+
+  font-size: 1rem;
+
+  &__icon {
+    font-size: 50px;
+  }
+}

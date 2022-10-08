@@ -1,5 +1,5 @@
 import { LoadingPage } from "components";
-import { onAuthStateChanged, User } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/router";
 import {
   createContext,
@@ -13,7 +13,11 @@ import { LoggedState } from "types";
 
 interface UserContext {
   user: {
-    data: User | null | string;
+    data: {
+      name: string | null;
+      avatar: string | null;
+      email: string | null;
+    };
     state: LoggedState;
     protectedContent: (type: LoggedState, reactNode: ReactNode) => ReactNode;
   };
@@ -22,8 +26,14 @@ interface UserContext {
   };
 }
 
+const initialData = {
+  name: "",
+  email: "",
+  avatar: "",
+};
+
 const userContext = createContext<UserContext["user"]>({
-  data: null,
+  data: initialData,
   state: "UNKNOWN",
   protectedContent: () => <></>,
 });
@@ -36,16 +46,20 @@ export const useUser = () => {
 export function UserProvider({ children }: UserContext["props"]) {
   const route = useRouter();
 
-  const [data, setData] = useState<UserContext["user"]["data"]>(null);
+  const [data, setData] = useState<UserContext["user"]["data"]>(initialData);
   const [state, setState] = useState<UserContext["user"]["state"]>("UNKNOWN");
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setData(user);
+        setData({
+          name: user.displayName,
+          email: user.email,
+          avatar: user.photoURL,
+        });
         setState("LOGGED_IN");
       } else {
-        setData(null);
+        setData(initialData);
         setState("LOGGED_OUT");
       }
     });

@@ -2,22 +2,36 @@ import { Button } from "components";
 import { useUser } from "context/UserContext";
 import useAuth from "hooks/useAuth";
 import { AppleIcon, GoogleIcon } from "icons";
+import Head from "next/head";
+import { useState } from "react";
 import styles from "styles/Login.module.scss";
 
 export default function Login() {
   const user = useUser();
   const auth = useAuth();
 
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSignInWithGoogle = () =>
+    auth
+      .signInWithGoogle()
+      .catch(() =>
+        setError("Error al iniciar sesión en Google, inténtalo de nuevo.")
+      );
+
   return user.protectedContent(
     "LOGGED_OUT",
     <div className={styles.login}>
+      <Head>
+        <title>Login / Ditter</title>
+      </Head>
       <div className={`${styles.login__content}`}>
         <div className={`${styles.section} ${styles["section--full"]}`}>
           <h1 className={styles.section__title}>Lo que está pasando ahora</h1>
           <h2 className={styles.section__subtitle}>Únete a Ditter hoy mismo</h2>
           <nav className={styles.buttonbar}>
             <Button
-              onClick={auth.signInWithGoogle}
+              onClick={handleSignInWithGoogle}
               icon={<GoogleIcon />}
               label="Registrarse con Google"
               variant="secondary"
@@ -36,6 +50,7 @@ export default function Login() {
               disabled={true}
             />
           </nav>
+          {error && <p>{error}</p>}
         </div>
         <div className={styles.login__heroimage}></div>
         <div className={styles.section}>

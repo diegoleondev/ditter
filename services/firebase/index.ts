@@ -1,14 +1,17 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBN6zCbgQDnX3mNagqJeZmKEUJ4t-Z7Zxw",
-  authDomain: "ditter-diegoleon.firebaseapp.com",
-  projectId: "ditter-diegoleon",
-  storageBucket: "ditter-diegoleon.appspot.com",
-  messagingSenderId: "663330749828",
-  appId: "1:663330749828:web:0ebed8e4c142a1b0fc31d1",
+  apiKey: "AIzaSyAePwg01aJ78VYrsEKgPgOePQurUI5syIQ",
+  authDomain: "ditter-service.firebaseapp.com",
+  projectId: "ditter-service",
+  storageBucket: "ditter-service.appspot.com",
+  messagingSenderId: "848271620966",
+  appId: "1:848271620966:web:048f1130bf3959491da6a7",
+  measurementId: "G-EHN0VB3NH7",
 };
 
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth();
+export const db = getFirestore(app);

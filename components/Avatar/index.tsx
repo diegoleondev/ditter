@@ -3,18 +3,18 @@ import styles from "./styles.module.scss";
 
 interface Props {
   alt: string | null;
-  className?: string;
   src: string | null;
+  size: "small" | "medium" | "large";
 }
 
-export default function Avatar({ alt, className, src }: Props) {
+export default function Avatar({ alt, src, size }: Props) {
   return (
-    <Image
-      className={`${styles.avatar} ${className}`}
-      src={src ?? "/ditter-logo.png"}
-      alt={alt ?? "Avatar"}
-      width={44}
-      height={44}
-    />
+    <div className={`${styles.avatar} ${styles[`avatar--${size}`]}`}>
+      <Image
+        src={src ?? "/avatar-placeholder.jpg"}
+        alt={alt ?? "Avatar"}
+        layout="fill"
+      />
+    </div>
   );
 }

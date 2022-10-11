@@ -1,0 +1,23 @@
+.dweetEmbed {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 16px;
+  padding: 16px;
+
+  &__username {
+    font-weight: bold;
+    margin-right: 8px;
+  }
+
+  &__metadata {
+    color: var(--color-tertiary);
+  }
+
+  &__nickname {
+    margin-right: 8px;
+  }
+
+  &__timeago {
+    margin-left: 8px;
+  }
+}

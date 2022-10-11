@@ -1,4 +1,4 @@
-import { Button } from "components";
+import { Button, DitterByDiegoLeon } from "components";
 import { useUser } from "context/UserContext";
 import useAuth from "hooks/useAuth";
 import { AppleIcon, GoogleIcon } from "icons";
@@ -26,6 +26,7 @@ export default function Login() {
         <title>Login / Ditter</title>
       </Head>
       <div className={`${styles.login__content}`}>
+        <DitterByDiegoLeon />
         <div className={`${styles.section} ${styles["section--full"]}`}>
           <h1 className={styles.section__title}>Lo que está pasando ahora</h1>
           <h2 className={styles.section__subtitle}>Únete a Ditter hoy mismo</h2>
@@ -66,6 +67,10 @@ export default function Login() {
             </a>
             , desarrollado por <a href="https://midu.dev/">Midudev</a>
           </p>
+        </div>
+        <div className={styles.section}>
+          <h2 className={styles.section__subtitle}>Github</h2>
+          <p className={styles.section__paragraph}>Puedes descarga el codigo</p>
         </div>
       </div>
     </div>

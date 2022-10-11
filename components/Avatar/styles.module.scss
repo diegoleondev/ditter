@@ -1,3 +1,18 @@
 .avatar {
+  position: relative;
+  aspect-ratio: 1/1;
+  overflow: hidden;
   border-radius: 50%;
+
+  &--small {
+    width: 32px;
+  }
+
+  &--medium {
+    width: 40px;
+  }
+
+  &--large {
+    width: 48px;
+  }
 }

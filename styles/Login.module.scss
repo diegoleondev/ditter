@@ -34,8 +34,6 @@
     background-position: center, center;
     background-repeat: no-repeat, no-repeat;
 
-    box-shadow: 0px 0px 10px #1118;
-
     @media (min-width: 640px) {
       width: 40%;
       height: 100%;
@@ -60,6 +58,7 @@
 
 .section {
   width: 100%;
+  max-width: 640px;
   height: auto;
   padding: 5%;
   padding-top: 0;
@@ -74,7 +73,7 @@
     font-size: 60px;
     font-family: Boring;
     font-weight: bold;
-    color: var(--primary-color);
+    color: var(--color-tertiary);
   }
 
   &__subtitle {
@@ -82,11 +81,11 @@
 
     font-size: 40px;
     font-family: Boring;
-    color: var(--secondary-color);
+    color: var(--color-tertiary);
   }
 
   &__paragraph {
     font-size: 1.2rem;
-    color: var(--secondary-color);
+    color: var(--color-tertiary);
   }
 }

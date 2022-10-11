@@ -1,3 +1,40 @@
 .home {
   height: 100vh;
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 1;
+  grid-template-rows: 1fr max-content;
+}
+
+.header {
+  height: 52px;
+  width: 100%;
+
+  background-color: #ffffffd9;
+  backdrop-filter: blur(12px);
+  padding: 0 16px;
+
+  position: sticky;
+  top: 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 0 16px;
+  /* display: grid;
+  grid-template-columns: max-content 1fr 44px;
+  place-items: center;
+  gap: 8px; */
+}
+
+.main {
+  position: relative;
+  overflow-y: auto;
+}
+
+.button-dweet-mobile {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
 }

@@ -9,15 +9,11 @@ import {
   useState,
 } from "react";
 import { auth } from "services/firebase";
-import { LoggedState } from "types";
+import { LoggedState, User } from "types";
 
 interface UserContext {
   user: {
-    data: {
-      name: string | null;
-      avatar: string | null;
-      email: string | null;
-    };
+    data: User;
     state: LoggedState;
     protectedContent: (type: LoggedState, reactNode: ReactNode) => ReactNode;
   };
@@ -26,14 +22,15 @@ interface UserContext {
   };
 }
 
-const initialData = {
-  name: "",
-  email: "",
-  avatar: "",
+const initialUser: User = {
+  avatar: null,
+  id: null,
+  nickname: null,
+  username: null,
 };
 
 const userContext = createContext<UserContext["user"]>({
-  data: initialData,
+  data: initialUser,
   state: "UNKNOWN",
   protectedContent: () => <></>,
 });
@@ -46,20 +43,21 @@ export const useUser = () => {
 export function UserProvider({ children }: UserContext["props"]) {
   const route = useRouter();
 
-  const [data, setData] = useState<UserContext["user"]["data"]>(initialData);
+  const [data, setData] = useState<UserContext["user"]["data"]>(initialUser);
   const [state, setState] = useState<UserContext["user"]["state"]>("UNKNOWN");
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setData({
-          name: user.displayName,
-          email: user.email,
+          username: user.displayName,
           avatar: user.photoURL,
+          nickname: user.displayName,
+          id: user.uid,
         });
         setState("LOGGED_IN");
       } else {
-        setData(initialData);
+        setData(initialUser);
         setState("LOGGED_OUT");
       }
     });

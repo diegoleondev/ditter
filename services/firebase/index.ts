@@ -4,7 +4,7 @@ import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAePwg01aJ78VYrsEKgPgOePQurUI5syIQ",
-  authDomain: "ditter-service.firebaseapp.com",
+  authDomain: "ditter-diegoleon.vercel.app", //ditter-service.firebaseapp.com
   projectId: "ditter-service",
   storageBucket: "ditter-service.appspot.com",
   messagingSenderId: "848271620966",

@@ -1,5 +1,12 @@
 import { useUser } from "context/UserContext";
-import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  getDocs,
+  onSnapshot,
+  query,
+  where,
+} from "firebase/firestore";
 import { db } from "services/firebase";
 import { Dweet, User } from "types";
 export default function useFirestore() {
@@ -35,30 +42,31 @@ export default function useFirestore() {
     return addDoc(collections.dweets, dweet);
   };
 
-  async function getDweets() {
-    const snapshotDweets = await getDocs(collections.dweets);
-    const docsDweets = snapshotDweets.docs.map((doc) => doc.data());
-
-    const dweets = await docsDweets.map(async (dweet) => {
-      const { message, userId } = dweet;
+  function getDweets(pushDweets: any) {
+    function handleDocs(dweet: any) {
+      const { message, userId } = dweet.data();
 
       const q = query(collections.users, where("id", "==", userId));
 
-      const snapshotUsers = await getDocs(q);
-      const docsUsers = snapshotUsers.docs.map((doc) => doc.data());
-      const user = docsUsers[0];
+      const user = getDocs(q).then(
+        ({ docs }) => docs.map((doc) => doc.data())[0]
+      );
 
-      return {
+      return user.then((user) => ({
         message,
         nickname: user.nickname,
         timestamp: "date",
         username: user.username,
         avatar: user.avatar,
         userId: user.id,
-      };
-    });
+      }));
+    }
 
-    return Promise.all(dweets);
+    onSnapshot(collections.dweets, ({ docs }) => {
+      const embeds = docs.map(handleDocs);
+
+      Promise.all(embeds).then(pushDweets);
+    });
   }
   /* () =>
     getDocs(collections.dweets).then(({ docs }) =>

@@ -22,10 +22,8 @@
   align-items: center;
 
   gap: 0 16px;
-  /* display: grid;
-  grid-template-columns: max-content 1fr 44px;
-  place-items: center;
-  gap: 8px; */
+
+  z-index: 1;
 }
 
 .main {

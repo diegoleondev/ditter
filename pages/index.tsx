@@ -18,7 +18,7 @@ const Home = () => {
   const viewport = useViewport();
 
   const [dweetMessage, setDweetMessage] = useState("");
-  const [dweets, setDweets] = useState<Array<DweetEmbedType>>([]);
+  const [timeline, setTimeline] = useState<Array<DweetEmbedType>>([]);
 
   const handleChange: ChangeEventHandler = (event) => {
     const target = event.target as HTMLTextAreaElement;
@@ -34,7 +34,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    firestore.getDweets().then(setDweets);
+    firestore.getDweets(setTimeline);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -67,18 +67,22 @@ const Home = () => {
           />
         )}
 
-        {dweets.map(
-          ({ avatar, message, nickname, timestamp, userId, username }, key) => (
-            <DweetEmbed
-              key={key}
-              avatar={avatar}
-              content={message}
-              nickname={nickname}
-              timeago={timestamp}
-              username={username}
-            />
-          )
-        )}
+        {timeline &&
+          timeline.map(
+            (
+              { avatar, message, nickname, timestamp, userId, username },
+              key
+            ) => (
+              <DweetEmbed
+                key={key}
+                avatar={avatar}
+                content={message}
+                nickname={nickname}
+                timeago={timestamp}
+                username={username}
+              />
+            )
+          )}
 
         {viewport.size === "mobile" && (
           <div className={styles["button-dweet-mobile"]}>

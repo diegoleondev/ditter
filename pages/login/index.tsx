@@ -36,6 +36,7 @@ export default function Login() {
               icon={<GoogleIcon />}
               label="Registrarse con Google"
               variant="secondary"
+              layout="fill"
             />
             <Button
               onClick={() => console.log("proximamente")}
@@ -43,12 +44,14 @@ export default function Login() {
               label="Registrarse con Apple"
               variant="secondary"
               disabled={true}
+              layout="fill"
             />
             <hr />
             <Button
               label="Usar Correo Electrónico"
               onClick={() => console.log("proximamente")}
               disabled={true}
+              layout="fill"
             />
           </nav>
           {error && <p>{error}</p>}

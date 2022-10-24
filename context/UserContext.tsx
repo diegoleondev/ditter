@@ -23,10 +23,10 @@ interface UserContext {
 }
 
 const initialUser: User = {
-  avatar: null,
-  id: null,
-  nickname: null,
-  username: null,
+  avatar: "",
+  id: "",
+  nickname: "",
+  username: "",
 };
 
 const userContext = createContext<UserContext["user"]>({
@@ -50,9 +50,9 @@ export function UserProvider({ children }: UserContext["props"]) {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setData({
-          username: user.displayName,
-          avatar: user.photoURL,
-          nickname: user.displayName,
+          username: user.displayName!,
+          avatar: user.photoURL!,
+          nickname: user.displayName!,
           id: user.uid,
         });
         setState("LOGGED_IN");

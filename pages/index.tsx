@@ -49,11 +49,13 @@ const Home = () => {
       <main className={styles.main}>
         <header className={styles.header}>
           {viewport.size === "mobile" && (
-            <Avatar
-              size="small"
-              src={user.data.avatar}
-              alt={user.data.username}
-            />
+            <span onClick={() => auth.signOut()}>
+              <Avatar
+                size="small"
+                src={user.data.avatar}
+                alt={user.data.username}
+              />
+            </span>
           )}
           <h2>Inicio</h2>
           <Stars />
